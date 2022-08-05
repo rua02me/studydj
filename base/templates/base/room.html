@@ -65,11 +65,6 @@
               <span>@{{room.host.username}}</span>
             </a>
           </div>
-          <!-- <div class="room__details">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi, tenetur laudantium? Dicta repellendus
-            rerum consectetur, voluptatem repudiandae eum ea porro cupiditate provident nulla, deserunt, ab ipsum
-            corporis laboriosam deleniti molestias?
-          </div> -->
           <span class="room__topics">{{room.topic}}</span>
         </div>
 
@@ -104,7 +99,7 @@
               </div>
               <div class="thread__details">
                 <p>{{message.body}}</p >
-                <img style="width: 200px" src="/static/pic/{{ message.img }}" alt="">
+                <img style="width: 200px" src="/static/images/{{ message.img }}" alt="">
               </div>
             </div>
             {% endfor %}
@@ -117,15 +112,6 @@
           {% csrf_token %}
           <input name="body" placeholder="Write your message here..." />
         </form>
-      <!-- <div class="img_uploader_wrapper">
-            <form method="POST" enctype="multipart/form-data">
-              {% csrf_token %}
-              {{ form.as_p }}
-              <input name="img" type="file" accept="image/jpg,image/jpeg,image/gif,image/png">
-              <input  class="img-send-btn" >
-            </form>
-
-      </div> -->
       <div>
         <form class="img_uploader_wrapper" action="{% url 'add_message' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}

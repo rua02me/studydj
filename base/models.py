@@ -11,7 +11,7 @@ class User(AbstractUser):
     avatar = models.ImageField(null=True, default="avatar.svg")
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['username']
 
 
 class Topic(models.Model):
@@ -43,6 +43,7 @@ class Message(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     body = models.TextField()
     img = models.TextField()
+    # img = models.ImageField(upload_to='./static/images')
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
@@ -53,6 +54,6 @@ class Message(models.Model):
         return self.body[0:50]
 
 
-class MemeImg(models.Model):
-    name = models.CharField(max_length=50)
-    Meme_Img = models.ImageField(upload_to='./static/images')
+# class MemeImg(models.Model):
+#     name = models.CharField(max_length=50)
+#     Meme_Img = models.ImageField(upload_to='./static/images')

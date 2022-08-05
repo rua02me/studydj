@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse,HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
@@ -10,13 +10,6 @@ from studydj.settings import BASE_DIR
 
 import os
 
-# Create your views here.
-
-# rooms = [
-#     {'id':1, 'name':'Lets learn py!'},
-#     {'id':2, 'name':'Design!'},
-#     {'id':3, 'name':'Web!'},
-# ]
 
 def loginPage(request):
     page = 'login'
@@ -84,6 +77,7 @@ def home(request):
                'room_count': room_count, 'room_messages': room_messages}
     return render(request, 'base/home.html', context)
 
+
 def add_message(request):
 
     if request.method == 'POST':
@@ -92,12 +86,13 @@ def add_message(request):
         content = request.POST.get('content')
         obj = request.FILES.get('file')
 
-        f = open(os.path.join(BASE_DIR, 'static', 'pic', obj.name), 'wb')
+        f = open(os.path.join(BASE_DIR, 'static', 'images', obj.name), 'wb')
         for chunk in obj.chunks():
             f.write(chunk)
         f.close()
 
-        room_messages = Message(user_id=user_id, room_id=room_id, body=content, img=obj.name)
+        room_messages = Message(
+            user_id=user_id, room_id=room_id, body=content, img=obj.name)
         room_messages.save()
 
         return HttpResponseRedirect('/room/{}/'.format(room_id))
@@ -191,14 +186,14 @@ def deleteRoom(request, pk):
 @login_required(login_url='login')
 def deleteMessage(request, pk):
     message = Message.objects.get(id=pk)
-    
+
     if request.user != message.user:
         return HttpResponse('You are not allowed here!')
 
     if request.method == 'POST':
         room_id = request.POST.get('room_id')
         message.delete()
-        return redirect('/room/{}/'.format(room_id))
+        return redirect('home')
     return render(request, 'base/delete.html', {'obj': message})
 
 # can i just return room after deleting the message?
