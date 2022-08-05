@@ -1,1 +1,1 @@
-web: gunicorn studydj.wsgi --log-file -
+web: gunicorn base.wsgi --log-file -
