@@ -28,3 +28,4 @@ urllib3==1.26.11
 virtualenv==20.15.1
 virtualenv-clone==0.5.7
 virtualenvwrapper==4.8.4
+whitenoise==6.2.0
